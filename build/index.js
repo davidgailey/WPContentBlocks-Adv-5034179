@@ -219,11 +219,12 @@ var SvgBvLogo = function SvgBvLogo(props) {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @wordpress/element */ "@wordpress/element");
 /* harmony import */ var _wordpress_element__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _bv_logo_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../bv-logo.svg */ "./src/bv-logo.svg");
+/* harmony import */ var _wpsu_penn_state_svg__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../wpsu-penn-state.svg */ "./src/wpsu-penn-state.svg");
 /* harmony import */ var _bv_logo_white_svg__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../bv-logo-white.svg */ "./src/bv-logo-white.svg");
 
 var __ = wp.i18n.__;
-var registerBlockType = wp.blocks.registerBlockType; // Import SVG as React component using @svgr/webpack.
+var registerBlockType = wp.blocks.registerBlockType;
+var RichText = wp.editor.RichText; // Import SVG as React component using @svgr/webpack.
 // https://www.npmjs.com/package/@svgr/webpack
 
  // Import file as base64 encoded URI using url-loader.
@@ -232,21 +233,27 @@ var registerBlockType = wp.blocks.registerBlockType; // Import SVG as React comp
  // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-registration/
 
 registerBlockType("wpsu-podkit/get-started", {
-  title: __("Like & Subscribe", "wpsu-podkit"),
+  title: __("Get Started Block", "wpsu-podkit"),
   icon: {
-    src: _bv_logo_svg__WEBPACK_IMPORTED_MODULE_1__["ReactComponent"]
+    src: _wpsu_penn_state_svg__WEBPACK_IMPORTED_MODULE_1__["ReactComponent"]
   },
   category: "wpsu-podkit",
   // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
   edit: function edit(props) {
-    console.info(props);
+    console.info(props); // Lift info from props and populate various constants
+
+    var className = props.className;
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
-      className: "get-started-block container-fluid"
+      className: "{ `${className} get-started-block container-fluid` }"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "container"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", {
       className: "display-2"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("small", null, "Take the next step"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), "Get Started"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Find a campus, discover an academic program, and learn how you can successfully", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), "transition from service member to student at Penn State."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("small", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      placeholder: "Subtitle"
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      placeholder: "Title"
+    }), "Get Started"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Find a campus, discover an academic program, and learn how you can successfully", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), "transition from service member to student at Penn State."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
       type: "button",
       className: "btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
     }, "Get Started ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", null, "\u232A"))));
@@ -294,6 +301,70 @@ __webpack_require__.r(__webpack_exports__);
  * Import blocks as components.
  */
 
+
+
+/***/ }),
+
+/***/ "./src/wpsu-penn-state.svg":
+/*!*********************************!*\
+  !*** ./src/wpsu-penn-state.svg ***!
+  \*********************************/
+/*! exports provided: default, ReactComponent */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ReactComponent", function() { return SvgWpsuPennState; });
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+function _extends() { _extends = Object.assign || function (target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i]; for (var key in source) { if (Object.prototype.hasOwnProperty.call(source, key)) { target[key] = source[key]; } } } return target; }; return _extends.apply(this, arguments); }
+
+
+
+var _ref =
+/*#__PURE__*/
+react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M0 4.3h35l23.6 95.4h.6L85.5 4.3h30.6l26.3 95.4h.6l23.6-95.4h35L161 144.7h-33.3l-26.6-94.1h-.6l-26.6 94.1H40.6z",
+  fill: "#009bde"
+});
+
+var _ref2 =
+/*#__PURE__*/
+react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  "data-name": "SVGID",
+  d: "M462.2 48.7c-4.2-9.2-15.3-20-35.3-20-15.8-.3-25.8 5.3-25.8 13.6 0 24.4 88.5 3.6 88.5 56.6 0 33.9-30.2 49.1-62.4 49.1s-55.5-11.3-68-25.5l25.5-19.7c7.8 11.4 22.5 17.5 40.5 17.5 16.1 0 27.2-8.9 27.2-16.4 0-23.9-86.8-4.2-86.8-57.5C365.6 14.8 393 .9 427.7.9s51.4 17.2 58.1 25.6zM584.3 3.3v83.3c0 19.2-7.6 29.2-24.5 29.4s-24.6-10.2-24.6-29.4V3.3h-33.8v93c0 40.8 27.5 50.8 51.3 50.8h14.1c23.9 0 51.4-10 51.4-50.8v-93z",
+  fill: "#002d87"
+});
+
+var _ref3 =
+/*#__PURE__*/
+react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M281.1 161.1h12.1c7.1 0 10.6 4.4 10.6 10.3s-4.2 9.9-10.2 9.9h-6.8v10.2h-5.7zm5.7 15.4h5.7c3.6 0 5.4-2.2 5.4-5.1s-2.3-5.5-5.6-5.5h-5.5zM315.7 161.1h21.6v5.3h-15.8v6.9H336v5.1h-14.5v7.8h16.9v5.3h-22.7zM350.6 161.1h5.2l12.8 21.7h.1v-21.7h5.2v30.4h-5.3l-12.7-21.6h-.1v21.6h-5.2zM388.4 161.1h5.2l12.8 21.7h.1v-21.7h5.2v30.4h-5.3l-12.7-21.6h-.1v21.6h-5.2zM448.5 182.4a10.8 10.8 0 0 0 9.2 4.6c2.7 0 6.4-1 6.4-3.9s-2.2-3.1-6.3-4l-3.3-.8c-4.9-1.1-9.2-2.9-9.2-8.5s6.1-9.5 11.8-9.5a15.4 15.4 0 0 1 12.7 6.1l-4.7 3.6a8.7 8.7 0 0 0-8-4.4c-3.3 0-5.8 1.3-5.8 3.4s2.9 3.1 6.3 3.9l3.7.8c4.5 1 8.8 2.8 8.8 8.6 0 7.4-7 10-13.3 10s-10.3-2.2-13.2-6.4zM488.4 166.4h-8.3v-5.3h22.4v5.3h-8.3v25.1h-5.8zM519.1 161.1h6.7l10.1 30.4h-6l-1.7-5.9h-11.5l-1.8 5.9h-6zm3.4 5.6h-.1l-4.2 13.9h8.4zM550.7 166.4h-8.3v-5.3h22.3v5.3h-8.3v25.1h-5.7zM576.3 161.1h21.6v5.3h-15.8v6.9h14.5v5.1h-14.5v7.8H599v5.3h-22.7z",
+  fill: "#002d87"
+});
+
+var _ref4 =
+/*#__PURE__*/
+react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  fill: "#009bde",
+  d: "M269.6 97.8V48.4l42.1 24.1-42.1 25.3z"
+});
+
+var _ref5 =
+/*#__PURE__*/
+react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("path", {
+  d: "M287.7 0c-18.6 0-33.9 6.9-44.9 20.3V4.4h-30.2V192h32.9v-63.4c14 13.1 24.4 17.3 42.2 17.3 38.2 0 68.6-32.4 68.6-73.5S326.4 0 287.7 0zm-3.4 112.8a40.4 40.4 0 1 1 40.3-40.4 40.4 40.4 0 0 1-40.3 40.4z",
+  fill: "#002d87"
+});
+
+var SvgWpsuPennState = function SvgWpsuPennState(props) {
+  return react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement("svg", _extends({
+    "data-name": "Layer 1",
+    viewBox: "0 0 618.2 192.3"
+  }, props), _ref, _ref2, _ref3, _ref4, _ref5);
+};
+
+/* harmony default export */ __webpack_exports__["default"] = ("data:image/svg+xml;base64,PHN2ZyBpZD0iTGF5ZXJfMSIgZGF0YS1uYW1lPSJMYXllciAxIiB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHZpZXdCb3g9IjAgMCA2MTguMiAxOTIuMyI+PHRpdGxlPndwc3UtcGVubi1zdGF0ZTwvdGl0bGU+PHBhdGggaWQ9IlNWR0lEIiBkPSJNMzAuMywzOS4zaDM1bDIzLjYsOTUuNGguNmwyNi4zLTk1LjRoMzAuNmwyNi4zLDk1LjRoLjZsMjMuNi05NS40aDM1TDE5MS4zLDE3OS43SDE1OEwxMzEuNCw4NS42aC0uNmwtMjYuNiw5NC4xSDcwLjlaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzAuMyAtMzUpIiBmaWxsPSIjMDA5YmRlIi8+PHBhdGggaWQ9IlNWR0lELTIiIGRhdGEtbmFtZT0iU1ZHSUQiIGQ9Ik00OTIuNSw4My43Yy00LjItOS4yLTE1LjMtMjAtMzUuMy0yMC0xNS44LS4zLTI1LjgsNS4zLTI1LjgsMTMuNiwwLDI0LjQsODguNSwzLjYsODguNSw1Ni42LDAsMzMuOS0zMC4yLDQ5LjEtNjIuNCw0OS4xcy01NS41LTExLjMtNjgtMjUuNUw0MTUsMTM3LjhjNy44LDExLjQsMjIuNSwxNy41LDQwLjUsMTcuNSwxNi4xLDAsMjcuMi04LjksMjcuMi0xNi40LDAtMjMuOS04Ni44LTQuMi04Ni44LTU3LjUsMC0zMS42LDI3LjQtNDUuNSw2Mi4xLTQ1LjVzNTEuNCwxNy4yLDU4LjEsMjUuNloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMC4zIC0zNSkiIGZpbGw9IiMwMDJkODciLz48cGF0aCBpZD0iU1ZHSUQtMyIgZGF0YS1uYW1lPSJTVkdJRCIgZD0iTTYxNC42LDM4LjN2ODMuM2MwLDE5LjItNy42LDI5LjItMjQuNSwyOS40cy0yNC42LTEwLjItMjQuNi0yOS40VjM4LjNINTMxLjd2OTNjMCw0MC44LDI3LjUsNTAuOCw1MS4zLDUwLjhoMTQuMWMyMy45LDAsNTEuNC0xMCw1MS40LTUwLjh2LTkzWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjMgLTM1KSIgZmlsbD0iIzAwMmQ4NyIvPjxwYXRoIGQ9Ik0zMTEuNCwxOTYuMWgxMi4xYzcuMSwwLDEwLjYsNC40LDEwLjYsMTAuM3MtNC4yLDkuOS0xMC4yLDkuOWgtNi44djEwLjJoLTUuN1ptNS43LDE1LjRoNS43YzMuNiwwLDUuNC0yLjIsNS40LTUuMXMtMi4zLTUuNS01LjYtNS41aC01LjVaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzAuMyAtMzUpIiBmaWxsPSIjMDAyZDg3Ii8+PHBhdGggZD0iTTM0NiwxOTYuMWgyMS42djUuM0gzNTEuOHY2LjloMTQuNXY1LjFIMzUxLjh2Ny44aDE2Ljl2NS4zSDM0NloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMC4zIC0zNSkiIGZpbGw9IiMwMDJkODciLz48cGF0aCBkPSJNMzgwLjksMTk2LjFoNS4ybDEyLjgsMjEuN2guMVYxOTYuMWg1LjJ2MzAuNGgtNS4zbC0xMi43LTIxLjZoLS4xdjIxLjZoLTUuMloiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMC4zIC0zNSkiIGZpbGw9IiMwMDJkODciLz48cGF0aCBkPSJNNDE4LjcsMTk2LjFoNS4ybDEyLjgsMjEuN2guMVYxOTYuMUg0NDJ2MzAuNGgtNS4zTDQyNCwyMDQuOWgtLjF2MjEuNmgtNS4yWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjMgLTM1KSIgZmlsbD0iIzAwMmQ4NyIvPjxwYXRoIGQ9Ik00NzguOCwyMTcuNEExMC44LDEwLjgsMCwwLDAsNDg4LDIyMmMyLjcsMCw2LjQtMSw2LjQtMy45cy0yLjItMy4xLTYuMy00bC0zLjMtLjhjLTQuOS0xLjEtOS4yLTIuOS05LjItOC41czYuMS05LjUsMTEuOC05LjVhMTUuNCwxNS40LDAsMCwxLDEyLjcsNi4xbC00LjcsMy42YTguNyw4LjcsMCwwLDAtOC00LjRjLTMuMywwLTUuOCwxLjMtNS44LDMuNHMyLjksMy4xLDYuMywzLjlsMy43LjhjNC41LDEsOC44LDIuOCw4LjgsOC42LDAsNy40LTcsMTAtMTMuMywxMHMtMTAuMy0yLjItMTMuMi02LjRaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzAuMyAtMzUpIiBmaWxsPSIjMDAyZDg3Ii8+PHBhdGggZD0iTTUxOC43LDIwMS40aC04LjN2LTUuM2gyMi40djUuM2gtOC4zdjI1LjFoLTUuOFoiIHRyYW5zZm9ybT0idHJhbnNsYXRlKC0zMC4zIC0zNSkiIGZpbGw9IiMwMDJkODciLz48cGF0aCBkPSJNNTQ5LjQsMTk2LjFoNi43bDEwLjEsMzAuNGgtNmwtMS43LTUuOUg1NDdsLTEuOCw1LjloLTZabTMuNCw1LjZoLS4xbC00LjIsMTMuOWg4LjRaIiB0cmFuc2Zvcm09InRyYW5zbGF0ZSgtMzAuMyAtMzUpIiBmaWxsPSIjMDAyZDg3Ii8+PHBhdGggZD0iTTU4MSwyMDEuNGgtOC4zdi01LjNINTk1djUuM2gtOC4zdjI1LjFINTgxWiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjMgLTM1KSIgZmlsbD0iIzAwMmQ4NyIvPjxwYXRoIGQ9Ik02MDYuNiwxOTYuMWgyMS42djUuM0g2MTIuNHY2LjloMTQuNXY1LjFINjEyLjR2Ny44aDE2Ljl2NS4zSDYwNi42WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjMgLTM1KSIgZmlsbD0iIzAwMmQ4NyIvPjxwb2x5Z29uIHBvaW50cz0iMjY5LjYgOTcuOCAyNjkuNiA0OC40IDMxMS43IDcyLjUgMjY5LjYgOTcuOCIgZmlsbD0iIzAwOWJkZSIvPjxwYXRoIGQ9Ik0zMTgsMzVjLTE4LjYsMC0zMy45LDYuOS00NC45LDIwLjNWMzkuNEgyNDIuOVYyMjdoMzIuOVYxNjMuNmMxNCwxMy4xLDI0LjQsMTcuMyw0Mi4yLDE3LjMsMzguMiwwLDY4LjYtMzIuNCw2OC42LTczLjVTMzU2LjcsMzUsMzE4LDM1Wm0tMy40LDExMi44YTQwLjQsNDAuNCwwLDEsMSw0MC4zLTQwLjRBNDAuNCw0MC40LDAsMCwxLDMxNC42LDE0Ny44WiIgdHJhbnNmb3JtPSJ0cmFuc2xhdGUoLTMwLjMgLTM1KSIgZmlsbD0iIzAwMmQ4NyIvPjwvc3ZnPg==");
 
 
 /***/ }),

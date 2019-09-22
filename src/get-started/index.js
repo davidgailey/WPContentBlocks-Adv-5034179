@@ -10,13 +10,16 @@ import { ReactComponent as Logo } from "../bv-logo.svg";
 import logoWhiteURL from "../bv-logo-white.svg";
 
 // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-registration/
-registerBlockType("podkit/get-started", {
-  title: __("Like & Subscribe", "podkit"),
+registerBlockType("wpsu-podkit/get-started", {
+  title: __("Like & Subscribe", "wpsu-podkit"),
   icon: { src: Logo },
-  category: "military-podkit",
+  category: "wpsu-podkit",
 
   // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
   edit: props => {
+
+    console.info(props);
+
     return (
       <section className="get-started-block container-fluid">
         <div className="container">

@@ -94,12 +94,12 @@ var registerBlockType = wp.blocks.registerBlockType; // Import SVG as React comp
 
  // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-registration/
 
-registerBlockType("podkit/static", {
-  title: __("Like & Subscribe", "podkit"),
+registerBlockType("wpsu-podkit/static", {
+  title: __("Like & Subscribe", "wpsu-podkit"),
   icon: {
     src: _bv_logo_svg__WEBPACK_IMPORTED_MODULE_1__["ReactComponent"]
   },
-  category: "podkit",
+  category: "wpsu-podkit",
   // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
   edit: function edit() {
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
@@ -231,14 +231,15 @@ var registerBlockType = wp.blocks.registerBlockType; // Import SVG as React comp
 
  // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-registration/
 
-registerBlockType("podkit/get-started", {
-  title: __("Like & Subscribe", "podkit"),
+registerBlockType("wpsu-podkit/get-started", {
+  title: __("Like & Subscribe", "wpsu-podkit"),
   icon: {
     src: _bv_logo_svg__WEBPACK_IMPORTED_MODULE_1__["ReactComponent"]
   },
-  category: "military-podkit",
+  category: "wpsu-podkit",
   // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
   edit: function edit(props) {
+    console.info(props);
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
       className: "get-started-block container-fluid"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {

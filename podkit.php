@@ -64,8 +64,8 @@ function wpsu_podkit_block_categories($categories, $post)
         $categories,
         array(
             array(
-                'slug' => 'wpsu_podkit',
-                'title' => __('WPSU-Podkit', 'wpsu_podkit'),
+                'slug' => 'wpsu-podkit',
+                'title' => __('WPSU-Podkit', 'wpsu-podkit'),
                 'icon' => '',
             ),
         )

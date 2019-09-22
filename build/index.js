@@ -238,22 +238,61 @@ registerBlockType("wpsu-podkit/get-started", {
     src: _wpsu_penn_state_svg__WEBPACK_IMPORTED_MODULE_1__["ReactComponent"]
   },
   category: "wpsu-podkit",
+  attributes: {
+    largeTitle: {
+      type: 'string',
+      source: 'html',
+      selector: '.large-title'
+    },
+    smallTitle: {
+      type: 'string',
+      source: 'html',
+      selector: '.small-title'
+    }
+  },
   // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
   edit: function edit(props) {
     console.info(props); // Lift info from props and populate various constants
+    // It's good to put these here if they are reused multiple times in the jsx of edit or save methods
 
-    var className = props.className;
+    var setAttributes = props.setAttributes,
+        className = props.className,
+        largeTitle = props.attributes.largeTitle,
+        smallTitle = props.attributes.smallTitle;
+
+    var onChangeSmallTitle = function onChangeSmallTitle(newSmallTitle) {
+      // set the smallTitle attribute in props to new value from rich test field
+      setAttributes({
+        smallTitle: newSmallTitle
+      });
+    };
+
+    var onChangeLargeTitle = function onChangeLargeTitle(newLargeTitle) {
+      // set the largeTitle attribute in props to new value from rich test field
+      setAttributes({
+        largeTitle: newLargeTitle
+      });
+    };
+
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
       className: "{ `${className} get-started-block container-fluid` }"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "container"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", {
       className: "display-2"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("small", null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
-      placeholder: "Subtitle"
-    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
-      placeholder: "Title"
-    }), "Get Started"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Find a campus, discover an academic program, and learn how you can successfully", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), "transition from service member to student at Penn State."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("small", {
+      class: "small-title"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      placeholder: "Take the next step",
+      value: smallTitle,
+      onChange: onChangeSmallTitle
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+      class: "large-title"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      placeholder: "Get Started",
+      value: largeTitle,
+      onChange: onChangeLargeTitle
+    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Find a campus, discover an academic program, and learn how you can successfully", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), "transition from service member to student at Penn State."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
       type: "button",
       className: "btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
     }, "Get Started ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", null, "\u232A"))));
@@ -265,7 +304,15 @@ registerBlockType("wpsu-podkit/get-started", {
       className: "container"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", {
       className: "display-2"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("small", null, "Take the next step"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), "Get Started"), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Find a campus, discover an academic program, and learn how you can successfully", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), "transition from service member to student at Penn State."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("small", {
+      class: "small-title"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
+      value: props.attributes.smallTitle
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
+      class: "large-title"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
+      value: props.attributes.largeTitle
+    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Find a campus, discover an academic program, and learn how you can successfully", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), "transition from service member to student at Penn State."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
       type: "button",
       className: "btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
     }, "Get Started ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", null, "\u232A"))));

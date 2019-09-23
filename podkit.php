@@ -89,7 +89,14 @@ function wpsu_podkit_register_blocks()
 
     // Register the block editor script.
     wp_register_script(
-        'wpsu-podkit-editor-script',											// label
+        'wpsu-podkit-editor-script-static',											// label
+        plugins_url('build/index.js', __FILE__),						// script file
+        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'),		// dependencies
+        filemtime(plugin_dir_path(__FILE__).'build/index.js')		// set version as file last modified time
+    );
+
+    wp_register_script(
+        'wpsu-podkit-editor-script-get-started',											// label
         plugins_url('build/index.js', __FILE__),						// script file
         array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'),		// dependencies
         filemtime(plugin_dir_path(__FILE__).'build/index.js')		// set version as file last modified time
@@ -97,18 +104,32 @@ function wpsu_podkit_register_blocks()
 
     // Register the block editor stylesheet.
     wp_register_style(
-        'wpsu-podkit-editor-styles',											// label
+        'wpsu-podkit-editor-styles-static',											// label
         plugins_url('build/editor.css', __FILE__),					// CSS file
         array('wp-edit-blocks'),										// dependencies
         filemtime(plugin_dir_path(__FILE__).'build/editor.css')	// set version as file last modified time
     );
 
-    // Register the front-end stylesheet.
     wp_register_style(
-        'wpsu-podkit-front-end-styles',										// label
+        'wpsu-podkit-editor-styles-get-started',											// label
+        plugins_url('build/editor.css', __FILE__),					// CSS file
+        array('wp-edit-blocks'),										// dependencies
+        filemtime(plugin_dir_path(__FILE__).'build/editor.css')	// set version as file last modified time
+    );
+
+    // Register the front-end stylesheets.
+    wp_register_style(
+        'wpsu-podkit-front-end-styles-static',										// label
         plugins_url('build/style.css', __FILE__),						// CSS file
         array(),														// dependencies
         filemtime(plugin_dir_path(__FILE__).'build/style.css')	// set version as file last modified time
+    );
+
+    wp_register_style(
+        'wpsu-podkit-front-end-styles-get-started',										// label
+        plugins_url('../../themes/military-psu-edu/assets/css/blocks/get-started-block.min.css', __FILE__),						// CSS file
+        array(),														// dependencies
+        filemtime(plugin_dir_path(__FILE__).'../../themes/military-psu-edu/assets/css/blocks/get-started-block.min.css')	// set version as file last modified time
     );
 
     // Array of block created in this plugin.
@@ -117,12 +138,28 @@ function wpsu_podkit_register_blocks()
         'wpsu-podkit/get-started',
     ];
 
+    // $blocks = '{
+    //     "wpsu-podkit/static":"{
+
+    //     }",
+    //     "2":"b",
+    //     "3":"c",
+    //     "4":"d",
+    //     "5":"e"
+    // }';
+    // $obj = json_decode($json, TRUE);
+
+    // foreach($obj as $key => $value)
+    // {
+    //     echo 'Your key is: '.$key.' and the value of the key is:'.$value;
+    // }
+
     // Loop through $blocks and register each block with the same script and styles.
     foreach ($blocks as $block) {
         register_block_type($block, array(
-            'editor_script' => 'wpsu-podkit-editor-script',					// Calls registered script above
-            'editor_style' => 'wpsu-podkit-editor-styles',					// Calls registered stylesheet above
-            'style' => 'wpsu-podkit-front-end-styles',						// Calls registered stylesheet above
+            'editor_script' => 'wpsu-podkit-editor-script'.str_replace('wpsu-podkit/', '-', $block),					// Calls registered script above
+            'editor_style' => 'wpsu-podkit-editor-styles'.str_replace('wpsu-podkit/', '-', $block),					// Calls registered stylesheet above
+            'style' => 'wpsu-podkit-front-end-styles'.str_replace('wpsu-podkit/', '-', $block),						// Calls registered stylesheet above
         ));
     }
 

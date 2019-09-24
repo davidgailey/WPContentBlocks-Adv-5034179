@@ -56,9 +56,9 @@ add_filter('block_categories', 'wpsu_podkit_block_categories', 10, 2);
 
 function wpsu_podkit_block_categories($categories, $post)
 {
-    if ($post->post_type !== 'post') {
-        return $categories;
-    }
+    // if ($post->post_type !== 'post') {
+    //     return $categories;
+    // }
 
     return array_merge(
         $categories,
@@ -129,7 +129,7 @@ function wpsu_podkit_register_blocks()
         'wpsu-podkit-front-end-styles-get-started',										// label
         plugins_url('../../themes/military-psu-edu/assets/css/blocks/get-started-block.min.css', __FILE__),						// CSS file
         array(),														// dependencies
-        filemtime(plugin_dir_path(__FILE__).'../../themes/military-psu-edu/assets/css/blocks/get-started-block.min.css')	// set version as file last modified time
+        filemtime(get_template_directory().'/assets/css/blocks/get-started-block.min.css')	// set version as file last modified time
     );
 
     // Array of block created in this plugin.

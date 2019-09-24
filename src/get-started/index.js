@@ -54,10 +54,10 @@ registerBlockType("wpsu-podkit/get-started", {
 	};
 
     return (
-      <section className="{ `${className} get-started-block container-fluid` }">
+      <section className="{ `${className} get-started-block container-fluid ` }">
         <div className="container">
           <h1 className="display-2">
-            <small class="small-title">
+            <small class="small-title d-block">
 				<RichText
 					placeholder="Take the next step"
 					value={smallTitle}
@@ -94,10 +94,10 @@ registerBlockType("wpsu-podkit/get-started", {
   },
 	save: props => {
 		return (
-			<section className="get-started-block container-fluid">
+			<section className="get-started-block container-fluid ">
 			<div className="container">
 				<h1 className="display-2">
-					<small class="small-title">
+					<small class="small-title d-block">
 						<RichText.Content value={props.attributes.smallTitle} />
 					</small>
 					

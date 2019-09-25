@@ -1,6 +1,7 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { RichText } = wp.editor;
+const { MediaUpload, RichText } = wp.editor;
+const { Button } = wp.components;
 
 // Import SVG as React component using @svgr/webpack.
 // https://www.npmjs.com/package/@svgr/webpack
@@ -26,6 +27,13 @@ registerBlockType("wpsu-podkit/get-started", {
 			source: 'html',
 			selector: '.small-title',
 		},
+		watermarkImage: {
+			type: 'string',
+			source: 'attribute',
+			selector: '.get-started-block',
+			attribute: 'style',
+			default: 'lion-960.jpg',
+		},
 	},
 
 
@@ -40,8 +48,11 @@ registerBlockType("wpsu-podkit/get-started", {
 		className, 
 		attributes: {largeTitle},
 		attributes: {smallTitle},
+		attributes: {watermarkImage},
 		
 	} = props;
+
+
 
 	const onChangeSmallTitle = newSmallTitle => {
 		// set the smallTitle attribute in props to new value from rich test field
@@ -53,8 +64,31 @@ registerBlockType("wpsu-podkit/get-started", {
 		setAttributes({largeTitle : newLargeTitle}); 
 	};
 
+	const onImageSelect = imageObject => {
+		console.info(imageObject);
+		setAttributes({watermarkImage: imageObject.sizes.large.url});
+	}
+
+	let style1 = {
+		backgroundImage: `url(${watermarkImage})`,
+	}
+
     return (
-      <section className="{ `${className} get-started-block container-fluid ` }">
+      <section className="{ `${className} get-started-block container-fluid` }"
+	  	style={style1}
+	  			>
+		<MediaUpload
+			onSelect={onImageSelect}
+			type="image"
+			value={watermarkImage}
+			render={({ open }) => (
+				<Button onClick={open}>
+					Choose a watermark image.
+				</Button>
+			)}
+
+
+		/>
         <div className="container">
           <h1 className="display-2">
             <small class="small-title d-block">
@@ -93,8 +127,25 @@ registerBlockType("wpsu-podkit/get-started", {
     );
   },
 	save: props => {
+
+		// Lift info from props and populate various constants
+		// It's good to put these here if they are reused multiple times in the jsx of edit or save methods
+		const {
+			setAttributes,
+			className, 
+			attributes: {largeTitle},
+			attributes: {smallTitle},
+			attributes: {watermarkImage},
+			
+		} = props;
+
+		let style1 = {
+			backgroundImage: `url(${watermarkImage})`,
+		}
+
 		return (
-			<section className="get-started-block container-fluid ">
+			<section className="get-started-block container-fluid "
+					style={style1} >
 			<div className="container">
 				<h1 className="display-2">
 					<small class="small-title d-block">

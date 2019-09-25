@@ -98,7 +98,7 @@ function wpsu_podkit_register_blocks()
     wp_register_script(
         'wpsu-podkit-editor-script-get-started',											// label
         plugins_url('build/index.js', __FILE__),						// script file
-        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'),		// dependencies
+        array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor', 'wp-components'),		// dependencies
         filemtime(plugin_dir_path(__FILE__).'build/index.js')		// set version as file last modified time
     );
 

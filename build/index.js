@@ -224,7 +224,10 @@ __webpack_require__.r(__webpack_exports__);
 
 var __ = wp.i18n.__;
 var registerBlockType = wp.blocks.registerBlockType;
-var RichText = wp.editor.RichText; // Import SVG as React component using @svgr/webpack.
+var _wp$editor = wp.editor,
+    MediaUpload = _wp$editor.MediaUpload,
+    RichText = _wp$editor.RichText;
+var Button = wp.components.Button; // Import SVG as React component using @svgr/webpack.
 // https://www.npmjs.com/package/@svgr/webpack
 
  // Import file as base64 encoded URI using url-loader.
@@ -248,6 +251,13 @@ registerBlockType("wpsu-podkit/get-started", {
       type: 'string',
       source: 'html',
       selector: '.small-title'
+    },
+    watermarkImage: {
+      type: 'string',
+      source: 'attribute',
+      selector: '.get-started-block',
+      attribute: 'style',
+      default: 'lion-960.jpg'
     }
   },
   // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
@@ -258,7 +268,8 @@ registerBlockType("wpsu-podkit/get-started", {
     var setAttributes = props.setAttributes,
         className = props.className,
         largeTitle = props.attributes.largeTitle,
-        smallTitle = props.attributes.smallTitle;
+        smallTitle = props.attributes.smallTitle,
+        watermarkImage = props.attributes.watermarkImage;
 
     var onChangeSmallTitle = function onChangeSmallTitle(newSmallTitle) {
       // set the smallTitle attribute in props to new value from rich test field
@@ -274,9 +285,30 @@ registerBlockType("wpsu-podkit/get-started", {
       });
     };
 
+    var onImageSelect = function onImageSelect(imageObject) {
+      console.info(imageObject);
+      setAttributes({
+        watermarkImage: imageObject.sizes.large.url
+      });
+    };
+
+    var style1 = {
+      backgroundImage: "url(".concat(watermarkImage, ")")
+    };
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
-      className: "{ `${className} get-started-block container-fluid ` }"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "{ `${className} get-started-block container-fluid` }",
+      style: style1
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
+      onSelect: onImageSelect,
+      type: "image",
+      value: watermarkImage,
+      render: function render(_ref) {
+        var open = _ref.open;
+        return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
+          onClick: open
+        }, "Choose a watermark image.");
+      }
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "container"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", {
       className: "display-2"
@@ -298,8 +330,19 @@ registerBlockType("wpsu-podkit/get-started", {
     }, "Get Started ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", null, "\u232A"))));
   },
   save: function save(props) {
+    // Lift info from props and populate various constants
+    // It's good to put these here if they are reused multiple times in the jsx of edit or save methods
+    var setAttributes = props.setAttributes,
+        className = props.className,
+        largeTitle = props.attributes.largeTitle,
+        smallTitle = props.attributes.smallTitle,
+        watermarkImage = props.attributes.watermarkImage;
+    var style1 = {
+      backgroundImage: "url(".concat(watermarkImage, ")")
+    };
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
-      className: "get-started-block container-fluid "
+      className: "get-started-block container-fluid ",
+      style: style1
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "container"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("h1", {

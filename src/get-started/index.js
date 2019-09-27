@@ -1,6 +1,6 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { MediaUpload, RichText } = wp.editor;
+const { MediaUpload, RichText, URLInputButton } = wp.editor;
 const { Button } = wp.components;
 
 // Import SVG as React component using @svgr/webpack.
@@ -27,28 +27,48 @@ registerBlockType("wpsu-podkit/get-started", {
 			source: 'html',
 			selector: '.small-title',
 		},
+		description: {
+			type: 'string',
+			source: 'html',
+			selector: '.description',
+		},
 		watermarkImage: {
 			type: 'string',
 			source: 'attribute',
 			selector: '.get-started-block',
 			attribute: 'style',
-			default: 'lion-960.jpg',
+			default: '/wp-content/themes/military-psu-edu/assets/images/src/lion-960.jpg',
+		},
+		buttonText: {
+			type: 'string',
+			source: 'html',
+			selector: '',
+		},
+		buttonURL: {
+			type: 'string',
+			source: 'attribute',
+			selector: '.call-to-action',
+			attribute: 'href',
+			default: '',
 		},
 	},
 
 
   // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
   edit: props => {
-    console.info(props);
+	console.info(props);
 
 	// Lift info from props and populate various constants
 	// It's good to put these here if they are reused multiple times in the jsx of edit or save methods
-    const {
+	const {
 		setAttributes,
 		className, 
 		attributes: {largeTitle},
 		attributes: {smallTitle},
 		attributes: {watermarkImage},
+		attributes: {description},
+		attributes: {buttonText},
+		attributes: {buttonURL},
 		
 	} = props;
 
@@ -69,12 +89,27 @@ registerBlockType("wpsu-podkit/get-started", {
 		setAttributes({watermarkImage: imageObject.sizes.large.url});
 	}
 
+	const onChangeDescription = newDescription => {
+		// set the largeTitle attribute in props to new value from rich test field
+		setAttributes({description : newDescription}); 
+	};
+
+	const onChangeButtonText = newButtonText => {
+		// set the largeTitle attribute in props to new value from rich test field
+		setAttributes({buttonText : newButtonText}); 
+	};
+
+	const onChangeButtonURL = newButtonURL => {
+		console.info(newButtonURL);
+		setAttributes({buttonURL: newButtonURL});
+	}
+
 	let style1 = {
 		backgroundImage: `url(${watermarkImage})`,
 	}
 
-    return (
-      <section className="{ `${className} get-started-block container-fluid` }"
+	return (
+	  <section className="{ `${className} get-started-block container-fluid filter-color-7` }"
 	  	style={style1}
 	  			>
 		<MediaUpload
@@ -89,42 +124,60 @@ registerBlockType("wpsu-podkit/get-started", {
 
 
 		/>
-        <div className="container">
-          <h1 className="display-2">
-            <small class="small-title d-block">
-				<RichText
-					placeholder="Take the next step"
-					value={smallTitle}
-					onChange={onChangeSmallTitle}
-				/>
-			</small>
+		<div className="container">
+			<h1 className="display-2">
+				<small class="small-title d-block">
+					<RichText
+						placeholder="Take the next step"
+						value={smallTitle}
+						onChange={onChangeSmallTitle}
+					/>
+				</small>
 
-			<span class="large-title">
+				<span class="large-title">
+					<RichText
+						placeholder="Get Started"
+						value={largeTitle}
+						onChange={onChangeLargeTitle}
+					/>
+				</span>
+				
+			</h1>
+
+			<p className="description">
+				<RichText
+					placeholder="Find a campus, discover an academic program, and learn how you can
+						successfully 
+						transition from service member to student at Penn State."
+					value={description}
+					onChange={onChangeDescription}
+				/>
+			</p>
+
+			<a
+				href="#"
+				className="btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
+			>
 				<RichText
 					placeholder="Get Started"
-					value={largeTitle}
-					onChange={onChangeLargeTitle}
-				/>
-			</span>
-			
-          </h1>
+					value={buttonText}
+					onChange={onChangeButtonText}
+				/> 
+				 <span>〉</span>
+			</a>
 
-          <p>
-            Find a campus, discover an academic program, and learn how you can
-            successfully
-            <br/>
-            transition from service member to student at Penn State.
-          </p>
+			<URLInputButton
+				className=""
+				label=""
+				onChange={onChangeButtonURL}
+				url={buttonURL}
+			>
 
-          <button
-            type="button"
-            className="btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
-          >
-            Get Started <span>〉</span>
-          </button>
-        </div>
-      </section>
-    );
+			</URLInputButton>
+
+		</div>
+	  </section>
+	);
   },
 	save: props => {
 
@@ -136,6 +189,9 @@ registerBlockType("wpsu-podkit/get-started", {
 			attributes: {largeTitle},
 			attributes: {smallTitle},
 			attributes: {watermarkImage},
+			attributes: {description},
+			attributes: {buttonText},
+			attributes: {buttonURL},
 			
 		} = props;
 
@@ -144,32 +200,29 @@ registerBlockType("wpsu-podkit/get-started", {
 		}
 
 		return (
-			<section className="get-started-block container-fluid "
+			<section className="get-started-block container-fluid filter-color-7 "
 					style={style1} >
 			<div className="container">
 				<h1 className="display-2">
 					<small class="small-title d-block">
-						<RichText.Content value={props.attributes.smallTitle} />
+						<RichText.Content value={smallTitle} />
 					</small>
 					
 					<span class="large-title">
-						<RichText.Content value={props.attributes.largeTitle} />
+						<RichText.Content value={largeTitle} />
 					</span>
 				</h1>
 
-				<p>
-					Find a campus, discover an academic program, and learn how you can
-					successfully
-					<br/>
-					transition from service member to student at Penn State.
+				<p className="description">
+					{description}
 				</p>
 
-				<button
-					type="button"
+				<a
+					href="{buttonURL}"
 					className="btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
 					>
-					Get Started <span>〉</span>
-				</button>
+					{buttonText} <span>〉</span>
+				</a>
 			</div>
 			</section>
 		);

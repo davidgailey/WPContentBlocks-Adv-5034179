@@ -76,3 +76,7 @@ figure {
 	padding: 3em;
 	box-shadow: none;
 }
+
+button {
+	background-color: #fff5;
+}

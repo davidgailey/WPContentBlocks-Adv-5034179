@@ -226,7 +226,8 @@ var __ = wp.i18n.__;
 var registerBlockType = wp.blocks.registerBlockType;
 var _wp$editor = wp.editor,
     MediaUpload = _wp$editor.MediaUpload,
-    RichText = _wp$editor.RichText;
+    RichText = _wp$editor.RichText,
+    URLInputButton = _wp$editor.URLInputButton;
 var Button = wp.components.Button; // Import SVG as React component using @svgr/webpack.
 // https://www.npmjs.com/package/@svgr/webpack
 
@@ -252,12 +253,29 @@ registerBlockType("wpsu-podkit/get-started", {
       source: 'html',
       selector: '.small-title'
     },
+    description: {
+      type: 'string',
+      source: 'html',
+      selector: '.description'
+    },
     watermarkImage: {
       type: 'string',
       source: 'attribute',
       selector: '.get-started-block',
       attribute: 'style',
-      default: 'lion-960.jpg'
+      default: '/wp-content/themes/military-psu-edu/assets/images/src/lion-960.jpg'
+    },
+    buttonText: {
+      type: 'string',
+      source: 'html',
+      selector: ''
+    },
+    buttonURL: {
+      type: 'string',
+      source: 'attribute',
+      selector: '.call-to-action',
+      attribute: 'href',
+      default: ''
     }
   },
   // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
@@ -269,7 +287,10 @@ registerBlockType("wpsu-podkit/get-started", {
         className = props.className,
         largeTitle = props.attributes.largeTitle,
         smallTitle = props.attributes.smallTitle,
-        watermarkImage = props.attributes.watermarkImage;
+        watermarkImage = props.attributes.watermarkImage,
+        description = props.attributes.description,
+        buttonText = props.attributes.buttonText,
+        buttonURL = props.attributes.buttonURL;
 
     var onChangeSmallTitle = function onChangeSmallTitle(newSmallTitle) {
       // set the smallTitle attribute in props to new value from rich test field
@@ -292,11 +313,32 @@ registerBlockType("wpsu-podkit/get-started", {
       });
     };
 
+    var onChangeDescription = function onChangeDescription(newDescription) {
+      // set the largeTitle attribute in props to new value from rich test field
+      setAttributes({
+        description: newDescription
+      });
+    };
+
+    var onChangeButtonText = function onChangeButtonText(newButtonText) {
+      // set the largeTitle attribute in props to new value from rich test field
+      setAttributes({
+        buttonText: newButtonText
+      });
+    };
+
+    var onChangeButtonURL = function onChangeButtonURL(newButtonURL) {
+      console.info(newButtonURL);
+      setAttributes({
+        buttonURL: newButtonURL
+      });
+    };
+
     var style1 = {
       backgroundImage: "url(".concat(watermarkImage, ")")
     };
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
-      className: "{ `${className} get-started-block container-fluid` }",
+      className: "{ `${className} get-started-block container-fluid filter-color-7` }",
       style: style1
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
       onSelect: onImageSelect,
@@ -324,10 +366,25 @@ registerBlockType("wpsu-podkit/get-started", {
       placeholder: "Get Started",
       value: largeTitle,
       onChange: onChangeLargeTitle
-    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Find a campus, discover an academic program, and learn how you can successfully", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), "transition from service member to student at Penn State."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
-      type: "button",
+    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
+      className: "description"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      placeholder: "Find a campus, discover an academic program, and learn how you can successfully  transition from service member to student at Penn State.",
+      value: description,
+      onChange: onChangeDescription
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+      href: "#",
       className: "btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
-    }, "Get Started ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", null, "\u232A"))));
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
+      placeholder: "Get Started",
+      value: buttonText,
+      onChange: onChangeButtonText
+    }), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", null, "\u232A")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(URLInputButton, {
+      className: "",
+      label: "",
+      onChange: onChangeButtonURL,
+      url: buttonURL
+    })));
   },
   save: function save(props) {
     // Lift info from props and populate various constants
@@ -336,12 +393,15 @@ registerBlockType("wpsu-podkit/get-started", {
         className = props.className,
         largeTitle = props.attributes.largeTitle,
         smallTitle = props.attributes.smallTitle,
-        watermarkImage = props.attributes.watermarkImage;
+        watermarkImage = props.attributes.watermarkImage,
+        description = props.attributes.description,
+        buttonText = props.attributes.buttonText,
+        buttonURL = props.attributes.buttonURL;
     var style1 = {
       backgroundImage: "url(".concat(watermarkImage, ")")
     };
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
-      className: "get-started-block container-fluid ",
+      className: "get-started-block container-fluid filter-color-7 ",
       style: style1
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "container"
@@ -350,15 +410,17 @@ registerBlockType("wpsu-podkit/get-started", {
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("small", {
       class: "small-title d-block"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
-      value: props.attributes.smallTitle
+      value: smallTitle
     })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", {
       class: "large-title"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
-      value: props.attributes.largeTitle
-    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", null, "Find a campus, discover an academic program, and learn how you can successfully", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("br", null), "transition from service member to student at Penn State."), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("button", {
-      type: "button",
+      value: largeTitle
+    }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
+      className: "description"
+    }, description), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
+      href: "{buttonURL}",
       className: "btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
-    }, "Get Started ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", null, "\u232A"))));
+    }, buttonText, " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", null, "\u232A"))));
   }
 }); // <div className="podkit-block podkit-static">
 //         <figure className="podkit-logo">

@@ -246,17 +246,20 @@ registerBlockType("wpsu-podkit/get-started", {
     largeTitle: {
       type: 'string',
       source: 'html',
-      selector: '.large-title'
+      selector: '.large-title',
+      default: 'Get Started'
     },
     smallTitle: {
       type: 'string',
       source: 'html',
-      selector: '.small-title'
+      selector: '.small-title',
+      default: 'Take the next step'
     },
     description: {
       type: 'string',
       source: 'html',
-      selector: '.description'
+      selector: '.description',
+      default: 'Find a campus, discover an academic program, and learn how you can successfully transition from service member to student at Penn State.'
     },
     watermarkImage: {
       type: 'string',
@@ -268,15 +271,19 @@ registerBlockType("wpsu-podkit/get-started", {
     buttonText: {
       type: 'string',
       source: 'html',
-      selector: ''
+      selector: '.call-to-action',
+      default: 'Get Started'
     },
     buttonURL: {
       type: 'string',
       source: 'attribute',
       selector: '.call-to-action',
       attribute: 'href',
-      default: ''
+      default: '#'
     }
+  },
+  supports: {
+    align: true
   },
   // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
   edit: function edit(props) {
@@ -367,7 +374,7 @@ registerBlockType("wpsu-podkit/get-started", {
       value: largeTitle,
       onChange: onChangeLargeTitle
     }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
-      className: "description"
+      className: "description w-50 mx-auto"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
       placeholder: "Find a campus, discover an academic program, and learn how you can successfully  transition from service member to student at Penn State.",
       value: description,
@@ -416,7 +423,7 @@ registerBlockType("wpsu-podkit/get-started", {
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
       value: largeTitle
     }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
-      className: "description"
+      className: "description w-50 mx-auto"
     }, description), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
       href: "{buttonURL}",
       className: "btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"

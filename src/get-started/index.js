@@ -32,7 +32,7 @@ registerBlockType("wpsu-podkit/get-started", {
 		description: {
 			type: 'string',
 			source: 'html',
-			selector: '.description',
+			selector: '.get-started-description',
 			default:'Find a campus, discover an academic program, and learn how you can successfully transition from service member to student at Penn State.'
 		},
 		watermarkImage: {
@@ -151,7 +151,7 @@ registerBlockType("wpsu-podkit/get-started", {
 				
 			</h1>
 
-			<p className="description w-50 mx-auto">
+			<p className="get-started-description w-50 mx-auto">
 				<RichText
 					placeholder="Find a campus, discover an academic program, and learn how you can
 						successfully 
@@ -220,7 +220,7 @@ registerBlockType("wpsu-podkit/get-started", {
 					</span>
 				</h1>
 
-				<p className="description w-50 mx-auto">
+				<p className="get-started-description w-50 mx-auto">
 					{description}
 				</p>
 

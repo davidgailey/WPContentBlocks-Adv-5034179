@@ -258,7 +258,7 @@ registerBlockType("wpsu-podkit/get-started", {
     description: {
       type: 'string',
       source: 'html',
-      selector: '.description',
+      selector: '.get-started-description',
       default: 'Find a campus, discover an academic program, and learn how you can successfully transition from service member to student at Penn State.'
     },
     watermarkImage: {
@@ -374,7 +374,7 @@ registerBlockType("wpsu-podkit/get-started", {
       value: largeTitle,
       onChange: onChangeLargeTitle
     }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
-      className: "description w-50 mx-auto"
+      className: "get-started-description w-50 mx-auto"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText, {
       placeholder: "Find a campus, discover an academic program, and learn how you can successfully  transition from service member to student at Penn State.",
       value: description,
@@ -423,7 +423,7 @@ registerBlockType("wpsu-podkit/get-started", {
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(RichText.Content, {
       value: largeTitle
     }))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("p", {
-      className: "description w-50 mx-auto"
+      className: "get-started-description w-50 mx-auto"
     }, description), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
       href: "{buttonURL}",
       className: "btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"

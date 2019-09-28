@@ -57,7 +57,7 @@ registerBlockType("wpsu-podkit/get-started", {
 		},
 	},
 	supports: {
-		align: true,
+		align: [ 'wide', 'full' ],
 	},
 
 
@@ -116,7 +116,7 @@ registerBlockType("wpsu-podkit/get-started", {
 	}
 
 	return (
-	  <section className="{ `${className} get-started-block container-fluid filter-color-7` }"
+	  <section className="{className} get-started-block container-fluid filter-color-7"
 	  	style={style1}
 	  			>
 		<MediaUpload

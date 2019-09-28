@@ -283,7 +283,7 @@ registerBlockType("wpsu-podkit/get-started", {
     }
   },
   supports: {
-    align: true
+    align: ['wide', 'full']
   },
   // https://wordpress.org/gutenberg/handbook/designers-developers/developers/block-api/block-edit-save/
   edit: function edit(props) {
@@ -345,7 +345,7 @@ registerBlockType("wpsu-podkit/get-started", {
       backgroundImage: "url(".concat(watermarkImage, ")")
     };
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
-      className: "{ `${className} get-started-block container-fluid filter-color-7` }",
+      className: "{className} get-started-block container-fluid filter-color-7",
       style: style1
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
       onSelect: onImageSelect,

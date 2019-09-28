@@ -112,9 +112,10 @@ function wpsu_podkit_register_blocks()
 
     wp_register_style(
         'wpsu-podkit-editor-styles-get-started',											// label
-        plugins_url('build/editor.css', __FILE__),					// CSS file
+        // plugins_url('build/editor.css', __FILE__),					// CSS file
+        plugins_url('../../themes/military-psu-edu/assets/css/gutenberg-editor-styles.min.css', __FILE__),					// CSS file
         array('wp-edit-blocks'),										// dependencies
-        filemtime(plugin_dir_path(__FILE__).'build/editor.css')	// set version as file last modified time
+        filemtime(get_template_directory().'/assets/css/gutenberg-editor-styles.min.css')	// set version as file last modified time
     );
 
     // Register the front-end stylesheets.
@@ -154,11 +155,17 @@ function wpsu_podkit_register_blocks()
     //     echo 'Your key is: '.$key.' and the value of the key is:'.$value;
     // }
 
+    // add editor styles that are global on the front end
+    // add_editor_style('wp-rig-bootstrap-custom');
+    // add_editor_style('/wp-content/themes/military-psu-edu/assets/css/bootstrap-custom.min.css');
+    // add_editor_style(get_css_files());
+
     // Loop through $blocks and register each block with the same script and styles.
     foreach ($blocks as $block) {
         register_block_type($block, array(
             'editor_script' => 'wpsu-podkit-editor-script'.str_replace('wpsu-podkit/', '-', $block),					// Calls registered script above
             'editor_style' => 'wpsu-podkit-editor-styles'.str_replace('wpsu-podkit/', '-', $block),					// Calls registered stylesheet above
+            // 'editor_style' => array('wpsu-podkit-editor-styles'.str_replace('wpsu-podkit/', '-', $block), 'wp-rig-bootstrap-custom', 'wp-rig-global'),					// Calls registered stylesheet above
             'style' => 'wpsu-podkit-front-end-styles'.str_replace('wpsu-podkit/', '-', $block),						// Calls registered stylesheet above
         ));
     }

@@ -153,24 +153,21 @@ registerBlockType("wpsu-podkit/get-started", {
 						value={filterColor}
 						onChange={onChangeFilterColor}
 					/>
+					{/* Colors are found in /wp-content/themes/military-psu-edu/inc/Editor/Component.php */}
 					
 				</div>
 
 			</PanelBody>
 			<PanelBody title="Background Image">
 				<div className="compontents-base-control">
-					<div className="compontents-base-control__field">
-						<label className="compontents-base-control__label">
-							Choose a Background Image
-						</label>
-					</div>
+					
 					<MediaUpload
 						onSelect={onImageSelect}
 						type="image"
 						value={watermarkImage}
 						render={({ open }) => (
-							<Button onClick={open}>
-								Choose an image.
+							<Button onClick={open} className="btn btn-secondary">
+								Choose a Background Image
 							</Button>
 						)}
 					/>

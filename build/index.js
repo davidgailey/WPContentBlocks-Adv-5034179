@@ -383,19 +383,16 @@ registerBlockType("wpsu-podkit/get-started", {
       title: "Background Image"
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "compontents-base-control"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
-      className: "compontents-base-control__field"
-    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
-      className: "compontents-base-control__label"
-    }, "Choose a Background Image")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
       onSelect: onImageSelect,
       type: "image",
       value: watermarkImage,
       render: function render(_ref) {
         var open = _ref.open;
         return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(Button, {
-          onClick: open
-        }, "Choose an image.");
+          onClick: open,
+          className: "btn btn-secondary"
+        }, "Choose a Background Image");
       }
     })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
       className: "{className} get-started-block container-fluid",

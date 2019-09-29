@@ -146,7 +146,7 @@ registerBlockType("wpsu-podkit/get-started", {
 				<div className="compontents-base-control">
 					<div className="compontents-base-control__field">
 						<label className="compontents-base-control__label">
-							Filter Color
+							PSU Brand Colors
 						</label>
 					</div>
 					<ColorPalette
@@ -157,20 +157,31 @@ registerBlockType("wpsu-podkit/get-started", {
 				</div>
 
 			</PanelBody>
+			<PanelBody title="Background Image">
+				<div className="compontents-base-control">
+					<div className="compontents-base-control__field">
+						<label className="compontents-base-control__label">
+							Choose a Background Image
+						</label>
+					</div>
+					<MediaUpload
+						onSelect={onImageSelect}
+						type="image"
+						value={watermarkImage}
+						render={({ open }) => (
+							<Button onClick={open}>
+								Choose an image.
+							</Button>
+						)}
+					/>
+					
+				</div>
+
+			</PanelBody>
 		</InspectorControls>,
 		<section className="{className} get-started-block container-fluid"
 	  		style={style1}>
 			
-			<MediaUpload
-				onSelect={onImageSelect}
-				type="image"
-				value={watermarkImage}
-				render={({ open }) => (
-					<Button onClick={open}>
-						Choose a watermark image.
-					</Button>
-				)}
-			/>
 			<div className="container">
 				<h1 className="display-2">
 					<small class="small-title d-block">

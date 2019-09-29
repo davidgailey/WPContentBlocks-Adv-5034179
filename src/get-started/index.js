@@ -1,7 +1,14 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-const { MediaUpload, RichText, URLInputButton } = wp.editor;
-const { Button } = wp.components;
+const { MediaUpload, 
+		RichText, 
+		URLInputButton, 
+		InspectorControls,
+		ColorPalette,
+		BlockControls } = wp.editor;
+const { Button,
+		IconButton,
+		PanelBody } = wp.components;
 
 // Import SVG as React component using @svgr/webpack.
 // https://www.npmjs.com/package/@svgr/webpack
@@ -55,6 +62,10 @@ registerBlockType("wpsu-podkit/get-started", {
 			attribute: 'href',
 			default: '#',
 		},
+		filterColor: {
+			type: 'string',
+			default: '#1E407C',
+		}
 	},
 	supports: {
 		align: [ 'wide', 'full' ],
@@ -76,6 +87,7 @@ registerBlockType("wpsu-podkit/get-started", {
 		attributes: {description},
 		attributes: {buttonText},
 		attributes: {buttonURL},
+		attributes: {filterColor},
 		
 	} = props;
 
@@ -109,82 +121,111 @@ registerBlockType("wpsu-podkit/get-started", {
 	const onChangeButtonURL = newButtonURL => {
 		console.info(newButtonURL);
 		setAttributes({buttonURL: newButtonURL});
-	}
+	};
+
+	const onChangeFilterColor = newFilterColor => {
+		console.info(newFilterColor);
+		setAttributes({filterColor: newFilterColor});
+	};
 
 	let style1 = {
 		backgroundImage: `url(${watermarkImage})`,
+	};
+
+	let style2 = {
+		backgroundColor: `${filterColor}`,
+		background: `linear-gradient(-90deg, ${filterColor}cc 0%, ${filterColor}bb 100%)`,
 	}
 
-	return (
-	  <section className="{className} get-started-block container-fluid filter-color-7"
-	  	style={style1}
-	  			>
-		<MediaUpload
-			onSelect={onImageSelect}
-			type="image"
-			value={watermarkImage}
-			render={({ open }) => (
-				<Button onClick={open}>
-					Choose a watermark image.
-				</Button>
-			)}
+	// return an array
+	// first is the inspector controls then the actual jsx
+	return [
 
-
-		/>
-		<div className="container">
-			<h1 className="display-2">
-				<small class="small-title d-block">
-					<RichText
-						placeholder="Take the next step"
-						value={smallTitle}
-						onChange={onChangeSmallTitle}
+		<InspectorControls>
+			<PanelBody title="Filter Color">
+				<div className="compontents-base-control">
+					<div className="compontents-base-control__field">
+						<label className="compontents-base-control__label">
+							Filter Color
+						</label>
+					</div>
+					<ColorPalette
+						value={filterColor}
+						onChange={onChangeFilterColor}
 					/>
-				</small>
+					
+				</div>
 
-				<span class="large-title">
+			</PanelBody>
+		</InspectorControls>,
+		<section className="{className} get-started-block container-fluid"
+	  		style={style1}>
+			
+			<MediaUpload
+				onSelect={onImageSelect}
+				type="image"
+				value={watermarkImage}
+				render={({ open }) => (
+					<Button onClick={open}>
+						Choose a watermark image.
+					</Button>
+				)}
+			/>
+			<div className="container">
+				<h1 className="display-2">
+					<small class="small-title d-block">
+						<RichText
+							placeholder="Take the next step"
+							value={smallTitle}
+							onChange={onChangeSmallTitle}
+						/>
+					</small>
+
+					<span class="large-title">
+						<RichText
+							placeholder="Get Started"
+							value={largeTitle}
+							onChange={onChangeLargeTitle}
+						/>
+					</span>
+					
+				</h1>
+
+				<p className="get-started-description w-50 mx-auto">
+					<RichText
+						placeholder="Find a campus, discover an academic program, and learn how you can
+							successfully 
+							transition from service member to student at Penn State."
+						value={description}
+						onChange={onChangeDescription}
+					/>
+				</p>
+
+				<a
+					href="#"
+					className="btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
+				>
 					<RichText
 						placeholder="Get Started"
-						value={largeTitle}
-						onChange={onChangeLargeTitle}
-					/>
-				</span>
-				
-			</h1>
+						value={buttonText}
+						onChange={onChangeButtonText}
+					/> 
+					<span>〉</span>
+				</a>
 
-			<p className="get-started-description w-50 mx-auto">
-				<RichText
-					placeholder="Find a campus, discover an academic program, and learn how you can
-						successfully 
-						transition from service member to student at Penn State."
-					value={description}
-					onChange={onChangeDescription}
-				/>
-			</p>
+				<URLInputButton
+					className=""
+					label=""
+					onChange={onChangeButtonURL}
+					url={buttonURL}
+				>
 
-			<a
-				href="#"
-				className="btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
-			>
-				<RichText
-					placeholder="Get Started"
-					value={buttonText}
-					onChange={onChangeButtonText}
-				/> 
-				 <span>〉</span>
-			</a>
+				</URLInputButton>
 
-			<URLInputButton
-				className=""
-				label=""
-				onChange={onChangeButtonURL}
-				url={buttonURL}
-			>
-
-			</URLInputButton>
-
-		</div>
-	  </section>
-	);
+			</div>
+			<div className="filter-color-custom" style={style2}></div>
+		</section>
+	];
   },
 	save: props => {
 
@@ -199,6 +240,7 @@ registerBlockType("wpsu-podkit/get-started", {
 			attributes: {description},
 			attributes: {buttonText},
 			attributes: {buttonURL},
+			attributes: {filterColor},
 			
 		} = props;
 
@@ -206,31 +248,38 @@ registerBlockType("wpsu-podkit/get-started", {
 			backgroundImage: `url(${watermarkImage})`,
 		}
 
+		let style2 = {
+			backgroundColor: `${filterColor}`,
+			background: `linear-gradient(-90deg, ${filterColor}cc 0%, ${filterColor}bb 100%)`,
+		}
+
 		return (
-			<section className="get-started-block container-fluid filter-color-7 "
+			<section className="get-started-block container-fluid "
 					style={style1} >
-			<div className="container">
-				<h1 className="display-2">
-					<small class="small-title d-block">
-						<RichText.Content value={smallTitle} />
-					</small>
-					
-					<span class="large-title">
-						<RichText.Content value={largeTitle} />
-					</span>
-				</h1>
+				
+				<div className="container">
+					<h1 className="display-2">
+						<small class="small-title d-block">
+							<RichText.Content value={smallTitle} />
+						</small>
+						
+						<span class="large-title">
+							<RichText.Content value={largeTitle} />
+						</span>
+					</h1>
 
-				<p className="get-started-description w-50 mx-auto">
-					{description}
-				</p>
+					<p className="get-started-description w-50 mx-auto">
+						{description}
+					</p>
 
-				<a
-					href="{buttonURL}"
-					className="btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
-					>
-					{buttonText} <span>〉</span>
-				</a>
-			</div>
+					<a
+						href="{buttonURL}"
+						className="btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
+						>
+						{buttonText} <span>〉</span>
+					</a>
+				</div>
+				<div className="filter-color-custom" style={style2}></div>
 			</section>
 		);
 	}

@@ -227,8 +227,14 @@ var registerBlockType = wp.blocks.registerBlockType;
 var _wp$editor = wp.editor,
     MediaUpload = _wp$editor.MediaUpload,
     RichText = _wp$editor.RichText,
-    URLInputButton = _wp$editor.URLInputButton;
-var Button = wp.components.Button; // Import SVG as React component using @svgr/webpack.
+    URLInputButton = _wp$editor.URLInputButton,
+    InspectorControls = _wp$editor.InspectorControls,
+    ColorPalette = _wp$editor.ColorPalette,
+    BlockControls = _wp$editor.BlockControls;
+var _wp$components = wp.components,
+    Button = _wp$components.Button,
+    IconButton = _wp$components.IconButton,
+    PanelBody = _wp$components.PanelBody; // Import SVG as React component using @svgr/webpack.
 // https://www.npmjs.com/package/@svgr/webpack
 
  // Import file as base64 encoded URI using url-loader.
@@ -280,6 +286,10 @@ registerBlockType("wpsu-podkit/get-started", {
       selector: '.call-to-action',
       attribute: 'href',
       default: '#'
+    },
+    filterColor: {
+      type: 'string',
+      default: '#1E407C'
     }
   },
   supports: {
@@ -297,7 +307,8 @@ registerBlockType("wpsu-podkit/get-started", {
         watermarkImage = props.attributes.watermarkImage,
         description = props.attributes.description,
         buttonText = props.attributes.buttonText,
-        buttonURL = props.attributes.buttonURL;
+        buttonURL = props.attributes.buttonURL,
+        filterColor = props.attributes.filterColor;
 
     var onChangeSmallTitle = function onChangeSmallTitle(newSmallTitle) {
       // set the smallTitle attribute in props to new value from rich test field
@@ -341,11 +352,35 @@ registerBlockType("wpsu-podkit/get-started", {
       });
     };
 
+    var onChangeFilterColor = function onChangeFilterColor(newFilterColor) {
+      console.info(newFilterColor);
+      setAttributes({
+        filterColor: newFilterColor
+      });
+    };
+
     var style1 = {
       backgroundImage: "url(".concat(watermarkImage, ")")
     };
-    return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
-      className: "{className} get-started-block container-fluid filter-color-7",
+    var style2 = {
+      backgroundColor: "".concat(filterColor),
+      background: "linear-gradient(-90deg, ".concat(filterColor, "cc 0%, ").concat(filterColor, "bb 100%)") // return an array
+      // first is the inspector controls then the actual jsx
+
+    };
+    return [Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(InspectorControls, null, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(PanelBody, {
+      title: "Filter Color"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "compontents-base-control"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "compontents-base-control__field"
+    }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("label", {
+      className: "compontents-base-control__label"
+    }, "Filter Color")), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(ColorPalette, {
+      value: filterColor,
+      onChange: onChangeFilterColor
+    })))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
+      className: "{className} get-started-block container-fluid",
       style: style1
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])(MediaUpload, {
       onSelect: onImageSelect,
@@ -391,7 +426,10 @@ registerBlockType("wpsu-podkit/get-started", {
       label: "",
       onChange: onChangeButtonURL,
       url: buttonURL
-    })));
+    })), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "filter-color-custom",
+      style: style2
+    }))];
   },
   save: function save(props) {
     // Lift info from props and populate various constants
@@ -403,12 +441,17 @@ registerBlockType("wpsu-podkit/get-started", {
         watermarkImage = props.attributes.watermarkImage,
         description = props.attributes.description,
         buttonText = props.attributes.buttonText,
-        buttonURL = props.attributes.buttonURL;
+        buttonURL = props.attributes.buttonURL,
+        filterColor = props.attributes.filterColor;
     var style1 = {
       backgroundImage: "url(".concat(watermarkImage, ")")
     };
+    var style2 = {
+      backgroundColor: "".concat(filterColor),
+      background: "linear-gradient(-90deg, ".concat(filterColor, "cc 0%, ").concat(filterColor, "bb 100%)")
+    };
     return Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("section", {
-      className: "get-started-block container-fluid filter-color-7 ",
+      className: "get-started-block container-fluid ",
       style: style1
     }, Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
       className: "container"
@@ -427,7 +470,10 @@ registerBlockType("wpsu-podkit/get-started", {
     }, description), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("a", {
       href: "{buttonURL}",
       className: "btn btn-lg call-to-action bg-gradient-psu-sky text-light font-weight-bold"
-    }, buttonText, " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", null, "\u232A"))));
+    }, buttonText, " ", Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("span", null, "\u232A"))), Object(_wordpress_element__WEBPACK_IMPORTED_MODULE_0__["createElement"])("div", {
+      className: "filter-color-custom",
+      style: style2
+    }));
   }
 }); // <div className="podkit-block podkit-static">
 //         <figure className="podkit-logo">
